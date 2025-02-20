@@ -3,22 +3,39 @@ import { AuthContext } from "../../../providers/AuthContext";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import ToggleDarkMode from "../../../components/ToggleDarkMode";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Login = () => {
-    const { signInWIthGoogle, user, signOutUser } = useContext(AuthContext);
+    const { signInWithGoogle, user, signOutUser } = useContext(AuthContext);
+    const axiosPublic = useAxiosPublic();
 
-    const handleGoogleSignIn = () => {
-        signInWIthGoogle()
-            .then(result => {
-                console.log('Google Login user', result.user);
-                toast.success('Login Successful.')
-            })
-            .catch(err => {
-                console.log('');
-                toast.error(`Login Failed, ${err}`)
-            })
-    }
 
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInWithGoogle();
+            console.log('Google Login user', result.user);
+
+            if (result.user) {
+                const newUser = {
+                    name: result.user.displayName,
+                    email: result.user.email
+                };
+
+                const response = await axiosPublic.post('/users', newUser);
+                console.log(response);
+
+                if (response.data.insertedId) {
+                    toast.success('Login Successful.');
+                }
+            }
+        } catch (err) {
+            if (err.response?.status === 409) {
+                toast.success("User already exists. Logging in...");
+            } else {
+                toast.error(`Login Failed: ${err.message}`);
+            }
+        }
+    };
 
     return (
         <div className="bg-gray-100 dark:bg-gray-900">
