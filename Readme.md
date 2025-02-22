@@ -1,11 +1,3 @@
-### **📌 Step 1: Create a `README.md` File**
-
-Save this content as `README.md` in your project root directory.
-
----
-
-## **✅ README.md**
-
 # 📝 Task Management System
 
 A **drag-and-drop** task management system where users can create, update, delete, and organize tasks into three categories: **To-Do, In Progress, and Done**. Built with **React.js**, **Tailwind CSS**, **Node.js**, **Express.js**, and **MongoDB**.
