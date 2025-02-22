@@ -1,13 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthContext";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ToggleDarkMode from "../../../components/ToggleDarkMode";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Login = () => {
     const { signInWithGoogle, user, signOutUser } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
 
 
     const handleGoogleSignIn = async () => {
@@ -22,15 +23,17 @@ const Login = () => {
                 };
 
                 const response = await axiosPublic.post('/users', newUser);
-                console.log(response);
+                // console.log(response);
 
                 if (response.data.insertedId) {
                     toast.success('Login Successful.');
                 }
+                navigate('/')
             }
         } catch (err) {
             if (err.response?.status === 409) {
                 toast.success("User already exists. Logging in...");
+                navigate('/')
             } else {
                 toast.error(`Login Failed: ${err.message}`);
             }
