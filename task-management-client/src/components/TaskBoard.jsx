@@ -64,10 +64,10 @@ const TaskBoard = () => {
             <AddTask onTaskAdded={fetchTasks} />
 
             <DragDropContext onDragEnd={handleDragEnd}>
-                <div className="flex justify-between gap-4 p-4">
-                    <Column title="To Do" tasks={toDoTasks} id="To-Do" />
-                    <Column title="In Progress" tasks={inProgressTasks} id="In Progress" />
-                    <Column title="Done" tasks={doneTasks} id="Done" />
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4">
+                    <Column title="To Do" tasks={toDoTasks} id="To-Do" onTaskAdded={fetchTasks} />
+                    <Column title="In Progress" tasks={inProgressTasks} id="In Progress" onTaskAdded={fetchTasks} />
+                    <Column title="Done" tasks={doneTasks} id="Done" onTaskAdded={fetchTasks} />
                 </div>
             </DragDropContext>
         </div>

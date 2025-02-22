@@ -64,7 +64,21 @@ async function run() {
             }
         });
 
+        app.get("/tasks/:id", async (req, res) => {
+            const { id } = req.params;
 
+            try {
+                const task = await tasksCollection.findOne({ _id: new ObjectId(id) });
+
+                if (!task) {
+                    return res.status(404).json({ message: "Task not found" });
+                }
+
+                res.send(task);
+            } catch (error) {
+                res.status(500).json({ message: "Failed to fetch task details", error });
+            }
+        });
 
 
         // Add new task
@@ -87,30 +101,6 @@ async function run() {
             }
         });
 
-
-
-        // Update task category/order
-        // app.put("/tasks/:id", async (req, res) => {
-        //     const { id } = req.params;
-        //     const updatedTask = req.body;
-        //     await tasksCollection.updateOne({ _id: new ObjectId(id) }, { $set: updatedTask });
-        //     res.send({ message: "Task updated" });
-        // });
-
-        // app.put("/tasks/:id", async (req, res) => {
-        //     const { id } = req.params;
-        //     const { category } = req.body; // Only updating category
-
-        //     try {
-        //         await tasksCollection.updateOne(
-        //             { _id: new ObjectId(id) },
-        //             { $set: { category } }
-        //         );
-        //         res.send({ message: "Task updated successfully" });
-        //     } catch (error) {
-        //         res.status(500).json({ message: "Failed to update task", error });
-        //     }
-        // });
 
         app.put("/tasks/:id", async (req, res) => {
             const { id } = req.params;
@@ -163,12 +153,6 @@ async function run() {
                 res.status(500).json({ message: "Failed to update task order", error: error.message });
             }
         });
-
-
-
-
-
-
 
 
         // Delete task
