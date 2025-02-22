@@ -4,7 +4,7 @@ import Task from "./Task";
 const Column = ({ title, tasks, id, onTaskAdded }) => {
     return (
         <div
-            className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg w-64 h-[600px] overflow-y-auto"
+            className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg h-[600px] overflow-y-auto"
         >
             <h3 className="text-center font-bold">{title}</h3>
 

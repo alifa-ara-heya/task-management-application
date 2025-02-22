@@ -54,12 +54,16 @@ const TaskBoard = () => {
     };
 
     // Filter tasks into categories
-    const toDoTasks = tasks.filter((task) => task.category === "To-Do");
-    const inProgressTasks = tasks.filter((task) => task.category === "In Progress");
-    const doneTasks = tasks.filter((task) => task.category === "Done");
+    // const toDoTasks = tasks.filter((task) => task.category === "To-Do");
+    // const inProgressTasks = tasks.filter((task) => task.category === "In Progress");
+    // const doneTasks = tasks.filter((task) => task.category === "Done");
+    // Ensure tasks is always an array before filtering
+    const toDoTasks = Array.isArray(tasks) ? tasks.filter((task) => task.category === "To-Do") : [];
+    const inProgressTasks = Array.isArray(tasks) ? tasks.filter((task) => task.category === "In Progress") : [];
+    const doneTasks = Array.isArray(tasks) ? tasks.filter((task) => task.category === "Done") : [];
 
     return (
-        <div>
+        <div className="max-w-6xl mx-auto">
             <h3 className="text-center text-2xl font-bold mb-4">Progress Board</h3>
             <AddTask onTaskAdded={fetchTasks} />
 

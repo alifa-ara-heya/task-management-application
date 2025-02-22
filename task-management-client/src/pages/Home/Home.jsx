@@ -16,7 +16,7 @@ const Home = () => {
                 {/* <AddTask /> */}
                 {/* <Task task={{ id: 123, title: 'Make an app' }} /> */}
                 <TaskBoard />
-                <button onClick={signOutUser}>LogOut</button>
+                <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg" onClick={signOutUser}>LogOut</button>
             </div>
         </div>
     );
