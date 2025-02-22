@@ -50,7 +50,8 @@ const Login = () => {
                         {user ? "Welcome, " + user.displayName : "Sign in with Google"}
                     </h2>
                     {
-                        user && <p className="text-gray-900 dark:text-white text-center my-8">Go to <Link to='/'>Task Management</Link></p>
+                        user && <p className="text-gray-900 dark:text-white text-center my-8">Go to <span className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"><Link to='/'>Task Management</Link>
+                        </span></p>
                     }
                     <div className="flex justify-center mt-6">
                         {user ? (

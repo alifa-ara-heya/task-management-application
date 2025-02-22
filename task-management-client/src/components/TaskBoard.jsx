@@ -63,18 +63,22 @@ const TaskBoard = () => {
     const doneTasks = Array.isArray(tasks) ? tasks.filter((task) => task.category === "Done") : [];
 
     return (
-        <div className="max-w-6xl mx-auto">
-            <h3 className="text-center text-2xl font-bold mb-4">Progress Board</h3>
+        <div className="max-w-6xl mx-auto px-4 py-6">
+            <h3 className="text-center text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+                Task Management Board
+            </h3>
+
             <AddTask onTaskAdded={fetchTasks} />
 
             <DragDropContext onDragEnd={handleDragEnd}>
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-10">
                     <Column title="To Do" tasks={toDoTasks} id="To-Do" onTaskAdded={fetchTasks} />
                     <Column title="In Progress" tasks={inProgressTasks} id="In Progress" onTaskAdded={fetchTasks} />
                     <Column title="Done" tasks={doneTasks} id="Done" onTaskAdded={fetchTasks} />
                 </div>
             </DragDropContext>
         </div>
+
     );
 };
 
